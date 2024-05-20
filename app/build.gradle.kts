@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.safeargs)
     alias(libs.plugins.hilt)
     id ("kotlin-kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -37,6 +38,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -62,6 +67,9 @@ dependencies {
     //hilt / compiler
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+
+    //firebase-auth
+    implementation(libs.firebase.auth)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

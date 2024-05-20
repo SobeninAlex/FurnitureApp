@@ -20,6 +20,9 @@ viewpager2Version = "1.0.0-alpha.1"
 stepviewVersion = "1.5.1"
 navigationFragmentsVersion = "2.7.7"
 hiltAndroidVersion = "2.49"
+googleServices = "4.4.1"
+firebaseAuth = "23.0.0"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -54,6 +57,10 @@ hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref
 
 #hilt-compiler
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltAndroidVersion" }
+google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServices" }
+
+#firebase-auth
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 
 
 [plugins]
