@@ -11,14 +11,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.furnitureapp.R
 import com.example.furnitureapp.data.User
 import com.example.furnitureapp.databinding.FragmentRegisterBinding
+import com.example.furnitureapp.util.RegisterValidation
 import com.example.furnitureapp.util.Resource
 import com.example.furnitureapp.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 private const val TAG = "RegisterFragment"
 
@@ -29,7 +30,7 @@ class RegisterFragment : Fragment() {
     private val binding: FragmentRegisterBinding
         get() = _binding ?: throw RuntimeException("FragmentRegisterBinding is null")
 
-    private val registerViewMode by viewModels<RegisterViewModel>()
+    private val viewModeRegister by viewModels<RegisterViewModel>()
 
 
     override fun onCreateView(
@@ -52,7 +53,7 @@ class RegisterFragment : Fragment() {
                 )
                 val password = edPassword.text.toString()
 
-                registerViewMode.createAccountWithEmailAndPassword(
+                viewModeRegister.createAccountWithEmailAndPassword(
                     user = user,
                     password = password
                 )
@@ -61,7 +62,7 @@ class RegisterFragment : Fragment() {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                registerViewMode.register.collect {
+                viewModeRegister.register.collect {
                     when (it) {
                         is Resource.Error -> {
                             Log.d(TAG, it.message.toString())
@@ -78,6 +79,30 @@ class RegisterFragment : Fragment() {
                         }
 
                         is Resource.Initial -> {}
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModeRegister.validation.collect { validation ->
+                    if (validation.email is RegisterValidation.Failed) {
+                        withContext(Dispatchers.Main) {
+                            binding.edEmail.apply {
+                                requestFocus()
+                                error = validation.email.message
+                            }
+                        }
+                    }
+
+                    if (validation.password is RegisterValidation.Failed) {
+                        withContext(Dispatchers.Main) {
+                            binding.edPassword.apply {
+                                requestFocus()
+                                error = validation.password.message
+                            }
+                        }
                     }
                 }
             }
