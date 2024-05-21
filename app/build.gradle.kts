@@ -66,6 +66,7 @@ dependencies {
 
     //hilt / compiler
     implementation(libs.hilt.android)
+    implementation(libs.firebase.firestore)
     kapt(libs.hilt.compiler)
 
     //firebase-auth
