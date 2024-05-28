@@ -51,7 +51,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_lets_login" />
 
         <EditText
-            android:id="@+id/ed_first_name"
+            android:id="@+id/ed_email"
             style="@style/editText"
             android:layout_width="0dp"
             android:layout_height="@dimen/edit_text_height"
@@ -63,7 +63,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_have_account" />
 
         <EditText
-            android:id="@+id/ed_last_name"
+            android:id="@+id/ed_password"
             style="@style/editText"
             android:layout_width="0dp"
             android:layout_height="@dimen/edit_text_height"
@@ -72,7 +72,7 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="@id/guideline_login_right"
             app:layout_constraintStart_toStartOf="@id/guideline_login_left"
-            app:layout_constraintTop_toBottomOf="@id/ed_first_name" />
+            app:layout_constraintTop_toBottomOf="@id/ed_email" />
 
         <TextView
             android:id="@+id/tv_forgot_password"
@@ -84,9 +84,9 @@
             android:textAlignment="center"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@id/guideline_login_left"
-            app:layout_constraintTop_toBottomOf="@id/ed_last_name" />
+            app:layout_constraintTop_toBottomOf="@id/ed_password" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
             android:id="@+id/button_login"
             style="@style/blueButtonStyle"
             android:layout_width="0dp"
@@ -95,7 +95,8 @@
             android:text="@string/login_btn"
             app:layout_constraintEnd_toEndOf="@id/guideline_login_right"
             app:layout_constraintStart_toStartOf="@id/guideline_login_left"
-            app:layout_constraintTop_toBottomOf="@id/tv_forgot_password" />
+            app:layout_constraintTop_toBottomOf="@id/tv_forgot_password"
+            app:spinning_bar_color="@color/white" />
 
         <ImageView
             android:id="@+id/facebook_login"
