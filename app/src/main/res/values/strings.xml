@@ -24,4 +24,15 @@
     <string name="bottom_nav_search">Search</string>
     <string name="bottom_nav_cart">Cart</string>
     <string name="bottom_nav_profile">Profile</string>
+    <string name="search_now">Search Now</string>
+
+    <string-array name="tab_titles">
+        <item>Main</item>
+        <item>Chair</item>
+        <item>Cupboard</item>
+        <item>Table</item>
+        <item>Accessory</item>
+        <item>Furniture</item>
+    </string-array>
+
 </resources>
