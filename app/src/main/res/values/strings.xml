@@ -20,4 +20,8 @@
     <string name="reset_password">Reset Password</string>
     <string name="we_will_send_you_the_password">We will send you the password reset link to you email</string>
     <string name="reset_link_was_send_to_your_email">Reset link was send to your email</string>
+    <string name="bottom_nav_home">Home</string>
+    <string name="bottom_nav_search">Search</string>
+    <string name="bottom_nav_cart">Cart</string>
+    <string name="bottom_nav_profile">Profile</string>
 </resources>

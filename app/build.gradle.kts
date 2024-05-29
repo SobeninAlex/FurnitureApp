@@ -62,15 +62,18 @@ dependencies {
     implementation(libs.stepview)
 
     //navigation fragments
-    implementation(libs.navigation.fragments)
+    implementation(libs.navigation.fragment.ktx)
+    implementation(libs.navigation.ui.ktx)
 
     //hilt / compiler
     implementation(libs.hilt.android)
-    implementation(libs.firebase.firestore)
     kapt(libs.hilt.compiler)
 
     //firebase-auth
     implementation(libs.firebase.auth)
+
+    //firebase-firestore
+    implementation(libs.firebase.firestore)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

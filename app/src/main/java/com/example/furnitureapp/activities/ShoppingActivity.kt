@@ -5,11 +5,24 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.furnitureapp.R
+import com.example.furnitureapp.databinding.ActivityShoppingBinding
 
 class ShoppingActivity : AppCompatActivity() {
+
+    val binding by lazy {
+        ActivityShoppingBinding.inflate(layoutInflater)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_shopping)
+        setContentView(binding.root)
+
+        binding.bottomNavigation.setupWithNavController(
+            navController = findNavController(R.id.shopping_nav_host_fragment)
+        )
     }
+
 }
