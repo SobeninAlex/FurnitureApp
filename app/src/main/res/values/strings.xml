@@ -25,6 +25,10 @@
     <string name="bottom_nav_cart">Cart</string>
     <string name="bottom_nav_profile">Profile</string>
     <string name="search_now">Search Now</string>
+    <string name="add_to_cart_btn">Add to cart</string>
+    <string name="see_product_btn">See product</string>
+    <string name="best_deals_tv">Best deals</string>
+    <string name="best_products_tv">Best Products</string>
 
     <string-array name="tab_titles">
         <item>Main</item>
