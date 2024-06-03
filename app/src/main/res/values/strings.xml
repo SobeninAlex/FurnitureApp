@@ -54,4 +54,12 @@
         <item>Furniture</item>
     </string-array>
 
+    <string-array name="categories">
+        <item>Chair</item>
+        <item>Cupboard</item>
+        <item>Table</item>
+        <item>Accessory</item>
+        <item>Furniture</item>
+    </string-array>
+
 </resources>

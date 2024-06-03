@@ -3,9 +3,8 @@ package com.example.furnitureapp.activities
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -54,14 +53,26 @@ class AdminActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        initSpinner()
         clickListeners()
         viewModelObserver()
+    }
+
+    private fun initSpinner() {
+        val arrayAdapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item,
+            resources.getStringArray(R.array.categories)
+        )
+
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+        binding.spinnerCategory.adapter = arrayAdapter
     }
 
     private fun saveProduct() {
         with(binding) {
             val name = edName.text.toString().trim()
-            val category = edCategory.text.toString().trim()
+            val category = spinnerCategory.selectedItem.toString()
             val price = edPrice.text.toString().trim()
             val offerPercentage = edOfferPercentage.text.toString().trim()
             val description = edDescription.text.toString().trim()
@@ -89,9 +100,9 @@ class AdminActivity : AppCompatActivity() {
             return false
         }
 
-        if (binding.edCategory.text.toString().trim().isEmpty()) {
-            return false
-        }
+//        if (binding.edCategory.text.toString().trim().isEmpty()) {
+//            return false
+//        }
 
         if (selectedImages.isEmpty()) {
             return false

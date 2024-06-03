@@ -49,11 +49,11 @@
                 android:layout_marginTop="10dp"
                 android:hint="@string/name_hint" />
 
-            <EditText
-                android:id="@+id/ed_category"
+            <Spinner
+                android:id="@+id/spinner_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/category_hint" />
+                android:padding="6dp"/>
 
             <EditText
                 android:id="@+id/ed_description"
