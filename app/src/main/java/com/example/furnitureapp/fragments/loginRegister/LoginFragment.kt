@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.furnitureapp.R
+import com.example.furnitureapp.activities.AdminActivity
 import com.example.furnitureapp.activities.ShoppingActivity
 import com.example.furnitureapp.databinding.FragmentLoginBinding
 import com.example.furnitureapp.dialog.setupBottomSheetDialog
@@ -86,6 +87,8 @@ class LoginFragment : Fragment() {
                                 Snackbar.LENGTH_LONG
                             ).show()
                         }
+
+                        is Resource.Administrator -> {}
                     }
                 }
             }
@@ -110,6 +113,13 @@ class LoginFragment : Fragment() {
                             binding.buttonLogin.revertAnimation()
 
                             Intent(requireActivity(), ShoppingActivity::class.java).also { intent ->
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                                startActivity(intent)
+                            }
+                        }
+
+                        is Resource.Administrator -> {
+                            Intent(requireActivity(), AdminActivity::class.java).also { intent ->
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                                 startActivity(intent)
                             }

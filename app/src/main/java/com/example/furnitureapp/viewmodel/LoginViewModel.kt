@@ -23,6 +23,13 @@ class LoginViewModel @Inject constructor(
     val resetPassword = _resetPassword.asSharedFlow()
 
     fun login(email: String, password: String) {
+        if (email == "admin" && password == "admin") {
+            viewModelScope.launch {
+                _login.emit(Resource.Administrator())
+            }
+            return
+        }
+
         viewModelScope.launch {
             _login.emit(Resource.Loading())
         }

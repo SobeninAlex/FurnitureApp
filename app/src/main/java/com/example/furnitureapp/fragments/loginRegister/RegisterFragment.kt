@@ -85,6 +85,7 @@ class RegisterFragment : Fragment() {
                         }
 
                         is Resource.Initial -> {}
+                        is Resource.Administrator -> {}
                     }
                 }
             }

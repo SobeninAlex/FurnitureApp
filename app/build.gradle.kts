@@ -75,6 +75,19 @@ dependencies {
     //firebase-firestore
     implementation(libs.firebase.firestore)
 
+    //firebase-storage
+    implementation(libs.firebase.storage)
+
+    //Color picker
+    implementation(libs.colorpickerview)
+
+    //Coroutines for firebase
+    implementation(libs.coroutines.play.services)
+
+    //Lifecycle
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

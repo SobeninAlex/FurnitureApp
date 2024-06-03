@@ -29,6 +29,21 @@
     <string name="see_product_btn">See product</string>
     <string name="best_deals_tv">Best deals</string>
     <string name="best_products_tv">Best Products</string>
+    <string name="add_product_menu_item">Add product</string>
+    <string name="name_hint">Name</string>
+    <string name="product_general_information_label">Product general information:</string>
+    <string name="category_hint">Category</string>
+    <string name="product_description_hint">Product description (optional)</string>
+    <string name="price_hint">Price</string>
+    <string name="offer_percentage_hint">Offer Percentage (optional)</string>
+    <string name="product_details_label">Product details:</string>
+    <string name="sizes_optional_hint">Sizes (optional) | use , between each new size</string>
+    <string name="colors_btn">Colors</string>
+    <string name="images_btn">Images</string>
+    <string name="product_color_title_dialog">Product color</string>
+    <string name="select_btn_dialog">Select</string>
+    <string name="check_your_inputs">Check your inputs</string>
+    <string name="save_btn">Save</string>
 
     <string-array name="tab_titles">
         <item>Main</item>

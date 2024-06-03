@@ -5,6 +5,8 @@ sealed class Resource<T>(
     val message: String? = null
 ) {
 
+    class Administrator<T> : Resource<T>()
+
     class Success<T>(data: T) : Resource<T>(data = data)
 
     class Error<T>(message: String) : Resource<T>(message = message)

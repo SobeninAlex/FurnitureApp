@@ -20,9 +20,13 @@ viewpager2Version = "1.0.0-alpha.1"
 stepviewVersion = "1.5.1"
 navigationFragmentsVersion = "2.7.7"
 hiltAndroidVersion = "2.49"
-googleServices = "4.4.1"
+googleServices = "4.4.2"
 firebaseAuth = "23.0.0"
 firebaseFirestore = "25.0.0"
+firebaseStorage = "21.0.0"
+colorpickerviewVersion = "2.2.4"
+coroutinesPlayServicesVersion = "1.7.3"
+lifecycleVersion = "2.8.1"
 
 
 [libraries]
@@ -68,6 +72,19 @@ firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore
 
 #google-services
 google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServices" }
+
+#firebase-storage
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
+
+#Color picker
+colorpickerview = { group = "com.github.skydoves", name = "colorpickerview", version.ref = "colorpickerviewVersion" }
+
+#Coroutines for firebase
+coroutines-play-services = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-play-services", version.ref = "coroutinesPlayServicesVersion" }
+
+#Lifecycle
+lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleVersion" }
+lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleVersion" }
 
 
 [plugins]
