@@ -59,20 +59,19 @@ class AdminActivity : AppCompatActivity() {
     }
 
     private fun initSpinner() {
+        val categories = resources.getStringArray(R.array.categories)
         val arrayAdapter = ArrayAdapter(
             this,
-            android.R.layout.simple_spinner_item,
-            resources.getStringArray(R.array.categories)
+            R.layout.dropdown_item,
+            categories
         )
-
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
-        binding.spinnerCategory.adapter = arrayAdapter
+        binding.tvCategory.setAdapter(arrayAdapter)
     }
 
     private fun saveProduct() {
         with(binding) {
             val name = edName.text.toString().trim()
-            val category = spinnerCategory.selectedItem.toString()
+            val category = tvCategory.text.toString()
             val price = edPrice.text.toString().trim()
             val offerPercentage = edOfferPercentage.text.toString().trim()
             val description = edDescription.text.toString().trim()
