@@ -131,6 +131,10 @@ class AdminActivity : AppCompatActivity() {
                 binding.progressBar.visibility = View.INVISIBLE
             }
         }
+
+        viewModelAdmin.savedMessage.observe(this) { message ->
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun clickListeners() {

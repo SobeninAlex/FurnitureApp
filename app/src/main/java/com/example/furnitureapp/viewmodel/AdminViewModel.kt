@@ -35,6 +35,9 @@ class AdminViewModel @Inject constructor(
     private val storage: StorageReference
 ) : ViewModel() {
 
+    private val _savedMessage = MutableLiveData<String>()
+    val savedMessage: LiveData<String> = _savedMessage
+
     private val colorsList = mutableListOf<Int>()
     private val _selectedColors = MutableLiveData<List<Int>>()
     val selectedColors: LiveData<List<Int>> get() = _selectedColors
@@ -134,10 +137,12 @@ class AdminViewModel @Inject constructor(
                 .set(product)
                 .addOnSuccessListener {
                     _loadingStatus.value = false
+                    _savedMessage.value = "Product saved in storage"
                 }
                 .addOnFailureListener {
                     _loadingStatus.value = false
                     Log.e("error_tag", it.message.toString())
+                    _savedMessage.value = it.message.toString()
                 }
         }
     }
