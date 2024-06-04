@@ -55,6 +55,8 @@
     </string-array>
 
     <string-array name="categories">
+        <item>Special Products</item>
+        <item>Best Deals</item>
         <item>Chair</item>
         <item>Cupboard</item>
         <item>Table</item>

@@ -10,4 +10,14 @@ data class Product(
     val colors: List<Int>? = null,
     val sizes: List<String>? = null,
     val images: List<String>
-)
+) {
+
+    constructor() : this(
+        id = "0",
+        name = "",
+        category = "",
+        price = 0f,
+        images = emptyList()
+    )
+
+}

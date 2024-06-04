@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.furnitureapp.R
 import com.example.furnitureapp.data.Product
+import com.example.furnitureapp.util.Constants.PRODUCTS_COLLECTION
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.StorageReference
 import com.skydoves.colorpickerview.ColorEnvelope
@@ -132,7 +133,7 @@ class AdminViewModel @Inject constructor(
                 images = images
             )
 
-            firestore.collection("products")
+            firestore.collection(PRODUCTS_COLLECTION)
                 .document(product.id)
                 .set(product)
                 .addOnSuccessListener {
