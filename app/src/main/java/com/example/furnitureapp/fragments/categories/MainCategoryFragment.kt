@@ -13,6 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.furnitureapp.R
+import com.example.furnitureapp.adapters.BestDealsAdapter
+import com.example.furnitureapp.adapters.BestProductAdapter
 import com.example.furnitureapp.adapters.SpecialProductsAdapter
 import com.example.furnitureapp.databinding.FragmentMainCategoryBinding
 import com.example.furnitureapp.util.Resource
@@ -35,6 +37,14 @@ class MainCategoryFragment : Fragment() {
         SpecialProductsAdapter()
     }
 
+    private val bestProductAdapter by lazy {
+        BestProductAdapter()
+    }
+
+    private val bestDealsAdapter by lazy {
+        BestDealsAdapter()
+    }
+
     private val viewModelMainCategory by viewModels<MainCategoryViewModel>()
 
     override fun onCreateView(
@@ -50,6 +60,8 @@ class MainCategoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupSpecialProductRecyclerView()
+        setupBestDealsRecyclerView()
+        setupBestProductsRecyclerView()
         viewModelObserver()
     }
 
@@ -60,8 +72,20 @@ class MainCategoryFragment : Fragment() {
 
     private fun setupSpecialProductRecyclerView() {
         binding.rvSpecialProducts.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+//            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = specialProductAdapter
+        }
+    }
+
+    private fun setupBestProductsRecyclerView() {
+        binding.rvBestProducts.apply {
+            adapter = bestProductAdapter
+        }
+    }
+
+    private fun setupBestDealsRecyclerView() {
+        binding.rvBestDealsProducts.apply {
+            adapter = bestDealsAdapter
         }
     }
 

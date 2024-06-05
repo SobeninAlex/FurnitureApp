@@ -7,18 +7,22 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.furnitureapp.data.Product
-import com.example.furnitureapp.databinding.SpecialRvItemBinding
+import com.example.furnitureapp.databinding.BestDealsRvItemBinding
 
-class SpecialProductsAdapter :
-    RecyclerView.Adapter<SpecialProductsAdapter.SpecialProductsViewHolder>() {
+class BestDealsAdapter : RecyclerView.Adapter<BestDealsAdapter.BestDealsViewHolder>() {
 
-    inner class SpecialProductsViewHolder(private val binding: SpecialRvItemBinding) :
+    inner class BestDealsViewHolder(private val binding: BestDealsRvItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
             with(binding) {
-                Glide.with(itemView).load(product.images.first()).into(imageSpecialRvItem)
-                tvSpecialProductName.text = product.name
-                tvSpecialProductPrice.text = product.price.toString()
+                Glide.with(itemView).load(product.images.first()).into(imgBestDeal)
+                tvDealProductName.text = product.name
+                product.offerPercentage?.let {
+                    val remainingPricePercentage = 1f - it
+                    val priceAfterOffer = remainingPricePercentage * product.price
+                    tvNewPrice.text = "$ ${String.format("%.2f", priceAfterOffer)}"
+                }
+                tvOldPrice.text = "$ ${product.price}"
             }
         }
     }
@@ -35,9 +39,9 @@ class SpecialProductsAdapter :
 
     val differ = AsyncListDiffer(this, diffCallback)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecialProductsViewHolder {
-        return SpecialProductsViewHolder(
-            SpecialRvItemBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BestDealsViewHolder {
+        return BestDealsViewHolder(
+            BestDealsRvItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -45,7 +49,7 @@ class SpecialProductsAdapter :
         )
     }
 
-    override fun onBindViewHolder(holder: SpecialProductsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BestDealsViewHolder, position: Int) {
         val product = differ.currentList[position]
         holder.bind(product)
     }
