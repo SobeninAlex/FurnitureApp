@@ -53,12 +53,12 @@ class AdminActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        initSpinner()
+        initDropdown()
         clickListeners()
         viewModelObserver()
     }
 
-    private fun initSpinner() {
+    private fun initDropdown() {
         val categories = resources.getStringArray(R.array.categories)
         val arrayAdapter = ArrayAdapter(
             this,

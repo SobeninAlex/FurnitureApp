@@ -116,6 +116,60 @@ class MainCategoryFragment : Fragment() {
                 }
             }
         }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModelMainCategory.bestDealsProducts.collectLatest {
+                    when (it) {
+                        is Resource.Administrator -> {}
+
+                        is Resource.Error -> {
+                            hideLoading()
+                            Log.e(TAG, it.message.toString())
+                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                        }
+
+                        is Resource.Initial -> {}
+
+                        is Resource.Loading -> {
+                            showLoading()
+                        }
+
+                        is Resource.Success -> {
+                            bestDealsAdapter.differ.submitList(it.data)
+                            hideLoading()
+                        }
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModelMainCategory.bestProducts.collectLatest {
+                    when (it) {
+                        is Resource.Administrator -> {}
+
+                        is Resource.Error -> {
+                            hideLoading()
+                            Log.e(TAG, it.message.toString())
+                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                        }
+
+                        is Resource.Initial -> {}
+
+                        is Resource.Loading -> {
+                            showLoading()
+                        }
+
+                        is Resource.Success -> {
+                            bestProductAdapter.differ.submitList(it.data)
+                            hideLoading()
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun hideLoading() {
