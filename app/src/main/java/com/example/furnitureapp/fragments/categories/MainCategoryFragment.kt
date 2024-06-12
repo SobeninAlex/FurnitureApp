@@ -6,12 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.example.furnitureapp.R
 import com.example.furnitureapp.adapters.BestDealsAdapter
 import com.example.furnitureapp.adapters.BestProductAdapter
@@ -63,16 +67,27 @@ class MainCategoryFragment : Fragment() {
         setupBestDealsRecyclerView()
         setupBestProductsRecyclerView()
         viewModelObserver()
+        scrollChangeListener()
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
 
+    private fun scrollChangeListener() {
+        binding.nestedScrollMainCategory.setOnScrollChangeListener(
+            NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+                if (v.getChildAt(0).bottom <= v.height + scrollY) {
+                    viewModelMainCategory.fetchBestProducts()
+                }
+            }
+        )
+    }
+
     private fun setupSpecialProductRecyclerView() {
         binding.rvSpecialProducts.apply {
-//            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = specialProductAdapter
         }
     }
@@ -151,7 +166,7 @@ class MainCategoryFragment : Fragment() {
                         is Resource.Administrator -> {}
 
                         is Resource.Error -> {
-                            hideLoading()
+                            binding.bestProductsProgressBar.visibility = View.GONE
                             Log.e(TAG, it.message.toString())
                             Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                         }
@@ -159,12 +174,12 @@ class MainCategoryFragment : Fragment() {
                         is Resource.Initial -> {}
 
                         is Resource.Loading -> {
-                            showLoading()
+                            binding.bestProductsProgressBar.visibility = View.VISIBLE
                         }
 
                         is Resource.Success -> {
                             bestProductAdapter.differ.submitList(it.data)
-                            hideLoading()
+                            binding.bestProductsProgressBar.visibility = View.GONE
                         }
                     }
                 }

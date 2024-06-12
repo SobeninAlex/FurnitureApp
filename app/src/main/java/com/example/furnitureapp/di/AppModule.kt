@@ -1,5 +1,8 @@
 package com.example.furnitureapp.di
 
+import android.app.Application
+import android.content.Context.MODE_PRIVATE
+import com.example.furnitureapp.util.Constants.INTRODUCTION_SP
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.ktx.firestore
@@ -26,5 +29,9 @@ object AppModule {
     @Provides
     @Singleton
     fun provideStorageReference() = Firebase.storage.reference
+
+    @Provides
+    fun provideIntroductionSharedPreferences(application: Application) =
+        application.getSharedPreferences(INTRODUCTION_SP, MODE_PRIVATE)
 
 }

@@ -5,6 +5,7 @@ import com.example.furnitureapp.data.Product
 import com.example.furnitureapp.util.Constants.PRODUCTS_COLLECTION
 import com.example.furnitureapp.util.Resource
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -24,6 +25,8 @@ class MainCategoryViewModel @Inject constructor(
 
     private val _bestProducts = MutableStateFlow<Resource<List<Product>>>(Resource.Initial())
     val bestProducts = _bestProducts.asStateFlow()
+
+    private val pagingInfo = PagingInfo()
 
     init {
         fetchSpecialProducts()
@@ -59,17 +62,24 @@ class MainCategoryViewModel @Inject constructor(
             }
     }
 
-    private fun fetchBestProducts() {
-        _bestProducts.value = Resource.Loading()
-        firestore.collection(PRODUCTS_COLLECTION)
-            .get()
-            .addOnSuccessListener { result ->
-                val bestProductList = result.toObjects(Product::class.java)
-                _bestProducts.value = Resource.Success(data = bestProductList)
-            }
-            .addOnFailureListener { exception ->
-                _bestProducts.value = Resource.Error(message = exception.message.toString())
-            }
+    fun fetchBestProducts() {
+        if (!pagingInfo.isPagingEnd) {
+            _bestProducts.value = Resource.Loading()
+            firestore.collection(PRODUCTS_COLLECTION)
+                .orderBy("price", Query.Direction.DESCENDING)
+                .limit(pagingInfo.bestProductPage * 4)
+                .get()
+                .addOnSuccessListener { result ->
+                    val bestProductList = result.toObjects(Product::class.java)
+                    pagingInfo.isPagingEnd = bestProductList == pagingInfo.oldBestProducts
+                    pagingInfo.oldBestProducts = bestProductList
+                    _bestProducts.value = Resource.Success(data = bestProductList)
+                    pagingInfo.bestProductPage++
+                }
+                .addOnFailureListener { exception ->
+                    _bestProducts.value = Resource.Error(message = exception.message.toString())
+                }
+        }
     }
 
     companion object {
@@ -79,6 +89,12 @@ class MainCategoryViewModel @Inject constructor(
     }
 
 }
+
+internal data class PagingInfo(
+    var bestProductPage: Long = 1,
+    var oldBestProducts: List<Product> = emptyList(),
+    var isPagingEnd: Boolean = false
+)
 
 /**
  * <string-array name="categories">
