@@ -2,7 +2,10 @@ package com.example.furnitureapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.example.furnitureapp.data.Product
+import com.example.furnitureapp.util.Constants.BEST_DEALS
+import com.example.furnitureapp.util.Constants.CATEGORY_FIELD
 import com.example.furnitureapp.util.Constants.PRODUCTS_COLLECTION
+import com.example.furnitureapp.util.Constants.SPECIAL_PRODUCTS
 import com.example.furnitureapp.util.Resource
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -80,12 +83,6 @@ class MainCategoryViewModel @Inject constructor(
                     _bestProducts.value = Resource.Error(message = exception.message.toString())
                 }
         }
-    }
-
-    companion object {
-        private const val CATEGORY_FIELD = "category"
-        private const val SPECIAL_PRODUCTS = "Special Products"
-        private const val BEST_DEALS = "Best Deals"
     }
 
 }

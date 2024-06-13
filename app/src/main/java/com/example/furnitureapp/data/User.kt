@@ -6,5 +6,12 @@ data class User(
     val email: String,
     var imagePath: String = ""
 ) {
-    constructor(): this("", "", "", "")
+
+    constructor(): this(
+        firstName = "",
+        lastName = "",
+        email = "",
+        imagePath = ""
+    )
+
 }

@@ -52,6 +52,7 @@ class HomeFragment : Fragment() {
             FurnitureFragment()
         )
 
+        //отключаем возможность слистывать фрагменты свайпом по экрану
         binding.viewPagerHome.isUserInputEnabled = false
 
         val viewPagerAdapter = HomeViewpagerAdapter(
@@ -62,6 +63,7 @@ class HomeFragment : Fragment() {
 
         binding.viewPagerHome.adapter = viewPagerAdapter
 
+        //связываем tab layout и view pager
         TabLayoutMediator(binding.tabLayout, binding.viewPagerHome) { tab, position ->
             val array = resources.getStringArray(R.array.tab_titles)
             tab.text = array[position]
