@@ -44,6 +44,8 @@
     <string name="select_btn_dialog">Select</string>
     <string name="check_your_inputs">Check your inputs</string>
     <string name="save_btn">Save</string>
+    <string name="color_product">Color</string>
+    <string name="size_product">Size</string>
 
     <string-array name="tab_titles">
         <item>Main</item>
