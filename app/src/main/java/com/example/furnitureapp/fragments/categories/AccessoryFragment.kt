@@ -59,7 +59,7 @@ class AccessoryFragment : BaseCategoryFragment() {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModelCategory.offerProducts.collectLatest {
+                viewModelCategory.bestProducts.collectLatest {
                     when (it) {
                         is Resource.Administrator -> {}
                         is Resource.Error -> {
