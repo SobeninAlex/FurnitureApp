@@ -11,6 +11,8 @@ import com.example.furnitureapp.databinding.BestDealsRvItemBinding
 
 class BestDealsAdapter : RecyclerView.Adapter<BestDealsAdapter.BestDealsViewHolder>() {
 
+    var onClick: ((Product) -> Unit)? = null
+
     inner class BestDealsViewHolder(private val binding: BestDealsRvItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
@@ -52,6 +54,10 @@ class BestDealsAdapter : RecyclerView.Adapter<BestDealsAdapter.BestDealsViewHold
     override fun onBindViewHolder(holder: BestDealsViewHolder, position: Int) {
         val product = differ.currentList[position]
         holder.bind(product)
+
+        holder.itemView.setOnClickListener {
+            onClick?.invoke(product)
+        }
     }
 
     override fun getItemCount(): Int {

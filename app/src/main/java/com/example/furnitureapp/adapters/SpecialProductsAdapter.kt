@@ -12,6 +12,8 @@ import com.example.furnitureapp.databinding.SpecialRvItemBinding
 class SpecialProductsAdapter :
     RecyclerView.Adapter<SpecialProductsAdapter.SpecialProductsViewHolder>() {
 
+    var onClick: ((Product) -> Unit)? = null
+
     inner class SpecialProductsViewHolder(private val binding: SpecialRvItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
@@ -48,6 +50,10 @@ class SpecialProductsAdapter :
     override fun onBindViewHolder(holder: SpecialProductsViewHolder, position: Int) {
         val product = differ.currentList[position]
         holder.bind(product)
+
+        holder.itemView.setOnClickListener {
+            onClick?.invoke(product)
+        }
     }
 
     override fun getItemCount(): Int {

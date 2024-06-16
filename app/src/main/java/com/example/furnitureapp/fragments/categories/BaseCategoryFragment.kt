@@ -6,9 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.furnitureapp.R
 import com.example.furnitureapp.adapters.BestProductAdapter
 import com.example.furnitureapp.databinding.FragmentBaseCategoryBinding
+import com.example.furnitureapp.fragments.categories.MainCategoryFragment.Companion.PRODUCT_PARCELABLE_KEY
+import com.example.furnitureapp.util.showBottomNavigation
 
 open class BaseCategoryFragment : Fragment() {
 
@@ -34,6 +38,11 @@ open class BaseCategoryFragment : Fragment() {
         setupRvOffer()
         setupRvBestProducts()
         scrollChangeListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showBottomNavigation()
     }
 
     override fun onDestroyView() {
@@ -89,11 +98,21 @@ open class BaseCategoryFragment : Fragment() {
         binding.rvBestProducts.apply {
             adapter = bestProductsAdapter
         }
+
+        bestProductsAdapter.onClick = {
+            val bundle = Bundle().apply { putParcelable(PRODUCT_PARCELABLE_KEY, it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productsDetailFragment, bundle)
+        }
     }
 
     private fun setupRvOffer() {
         binding.rvOfferProducts.apply {
             adapter = offerProductAdapter
+        }
+
+        offerProductAdapter.onClick = {
+            val bundle = Bundle().apply { putParcelable(PRODUCT_PARCELABLE_KEY, it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productsDetailFragment, bundle)
         }
     }
 

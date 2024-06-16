@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,7 @@ import com.example.furnitureapp.adapters.BestProductAdapter
 import com.example.furnitureapp.adapters.SpecialProductsAdapter
 import com.example.furnitureapp.databinding.FragmentMainCategoryBinding
 import com.example.furnitureapp.util.Resource
+import com.example.furnitureapp.util.showBottomNavigation
 import com.example.furnitureapp.viewmodel.MainCategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -70,6 +72,11 @@ class MainCategoryFragment : Fragment() {
         scrollChangeListener()
     }
 
+    override fun onResume() {
+        super.onResume()
+        showBottomNavigation()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -89,17 +96,32 @@ class MainCategoryFragment : Fragment() {
         binding.rvSpecialProducts.apply {
             adapter = specialProductAdapter
         }
+
+        specialProductAdapter.onClick = {
+            val bundle = Bundle().apply { putParcelable(PRODUCT_PARCELABLE_KEY, it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productsDetailFragment, bundle)
+        }
     }
 
     private fun setupBestProductsRecyclerView() {
         binding.rvBestProducts.apply {
             adapter = bestProductAdapter
         }
+
+        bestProductAdapter.onClick = {
+            val bundle = Bundle().apply { putParcelable(PRODUCT_PARCELABLE_KEY, it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productsDetailFragment, bundle)
+        }
     }
 
     private fun setupBestDealsRecyclerView() {
         binding.rvBestDealsProducts.apply {
             adapter = bestDealsAdapter
+        }
+
+        bestDealsAdapter.onClick = {
+            val bundle = Bundle().apply { putParcelable(PRODUCT_PARCELABLE_KEY, it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productsDetailFragment, bundle)
         }
     }
 
@@ -192,6 +214,10 @@ class MainCategoryFragment : Fragment() {
 
     private fun showLoading() {
         binding.mainCategoryProgressBar.visibility = View.VISIBLE
+    }
+
+    companion object {
+        const val PRODUCT_PARCELABLE_KEY = "product"
     }
 
 }
