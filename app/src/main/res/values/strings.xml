@@ -46,6 +46,9 @@
     <string name="save_btn">Save</string>
     <string name="color_product">Color</string>
     <string name="size_product">Size</string>
+    <string name="total_price">Total</string>
+    <string name="check_out_btn">Check out</string>
+    <string name="tv_cart_is_empty">Your shopping cart is empty</string>
 
     <string-array name="tab_titles">
         <item>Main</item>
