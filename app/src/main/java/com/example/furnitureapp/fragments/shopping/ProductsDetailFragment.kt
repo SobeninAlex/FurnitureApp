@@ -116,7 +116,7 @@ class ProductsDetailFragment : Fragment() {
                     when (it) {
                         is Resource.Administrator -> {}
                         is Resource.Error -> {
-                            binding.buttonAddToCart.stopAnimation()
+                            binding.buttonAddToCart.revertAnimation()
                             Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                         }
                         is Resource.Initial -> {}
@@ -124,7 +124,8 @@ class ProductsDetailFragment : Fragment() {
                             binding.buttonAddToCart.startAnimation()
                         }
                         is Resource.Success -> {
-                            binding.buttonAddToCart.stopAnimation()
+                            binding.buttonAddToCart.revertAnimation()
+                            Toast.makeText(requireContext(), "Product ${it.data?.product?.name} is added", Toast.LENGTH_SHORT).show()
                             binding.buttonAddToCart.setBackgroundColor(resources.getColor(R.color.black))
                         }
                     }

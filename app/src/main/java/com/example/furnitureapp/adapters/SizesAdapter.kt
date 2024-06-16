@@ -19,9 +19,11 @@ class SizesAdapter : ListAdapter<String, SizesAdapter.SizesViewHolder>(DiffCallb
         fun bind(item: String, position: Int) = with(binding) {
             tvSize.text = item
             if (position == selectedPosition) {
-                imageShadow.visibility == View.VISIBLE
+                imageShadow.visibility = View.VISIBLE
+                imagePicked.visibility = View.INVISIBLE
             } else {
-                imageShadow.visibility == View.INVISIBLE
+                imageShadow.visibility = View.INVISIBLE
+                imagePicked.visibility = View.INVISIBLE
             }
         }
     }

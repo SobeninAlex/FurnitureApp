@@ -38,4 +38,15 @@
         app:layout_constraintTop_toTopOf="@id/image_size"
         tools:text="X" />
 
+    <ImageView
+        android:id="@+id/image_picked"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/ic_picked"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/image_size"
+        app:layout_constraintEnd_toEndOf="@id/image_size"
+        app:layout_constraintStart_toStartOf="@id/image_size"
+        app:layout_constraintTop_toTopOf="@id/image_size" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
