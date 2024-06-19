@@ -142,9 +142,9 @@ class AdminActivity : AppCompatActivity() {
         }
 
         binding.buttonImagesPicker.setOnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            val intent = Intent(Intent.ACTION_PICK)
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            intent.type = "image/*"
+            intent.type = "video/*"
             selectImagesActivityResult.launch(intent)
         }
 
