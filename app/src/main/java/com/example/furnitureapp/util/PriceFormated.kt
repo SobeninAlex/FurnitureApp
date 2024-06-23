@@ -8,3 +8,7 @@ fun Float?.getProductPrice(price: Float): Float {
     val remainingPricePercentage = 1f - this
     return remainingPricePercentage * price
 }
+
+fun Float.formattedPrice(): String {
+    return "$ ${String.format("%.2f", this)}"
+}

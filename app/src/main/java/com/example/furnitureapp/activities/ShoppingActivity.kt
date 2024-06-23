@@ -26,7 +26,7 @@ class ShoppingActivity : AppCompatActivity() {
         ActivityShoppingBinding.inflate(layoutInflater)
     }
 
-    val viewMode by viewModels<CartViewModel>()
+    private val viewMode by viewModels<CartViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +46,11 @@ class ShoppingActivity : AppCompatActivity() {
                         is Resource.Loading -> {}
                         is Resource.Success -> {
                             val count = it.data?.size ?: 0
-                            binding.bottomNavigation.getOrCreateBadge(R.id.cartFragment).apply {
-                                number = count
-                                backgroundColor = resources.getColor(R.color.g_blue)
+                            if (count != 0) {
+                                binding.bottomNavigation.getOrCreateBadge(R.id.cartFragment).apply {
+                                    number = count
+                                    backgroundColor = getColor(R.color.g_blue)
+                                }
                             }
                         }
                     }

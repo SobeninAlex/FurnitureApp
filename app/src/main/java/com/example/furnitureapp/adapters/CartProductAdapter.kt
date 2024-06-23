@@ -10,12 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.furnitureapp.data.CartProduct
 import com.example.furnitureapp.databinding.CartProductItemBinding
+import com.example.furnitureapp.util.formattedPrice
 import com.example.furnitureapp.util.getProductPrice
 
 class CartProductAdapter : ListAdapter<CartProduct, CartProductAdapter.CartProductViewHolder>(DiffCallback) {
 
-    var clickPlus: ((CartProduct) -> Unit)? = null
-    var clickMinus: ((CartProduct) -> Unit)? = null
+    var onPlusClick: ((CartProduct) -> Unit)? = null
+    var onMinusClick: ((CartProduct) -> Unit)? = null
     var onProductClick: ((CartProduct) -> Unit)? = null
 
     inner class CartProductViewHolder(val binding: CartProductItemBinding) :
@@ -25,9 +26,9 @@ class CartProductAdapter : ListAdapter<CartProduct, CartProductAdapter.CartProdu
                 tvProductName.text = cartProduct.product.name
                 tvProductQuantity.text = cartProduct.quantity.toString()
                 val price = cartProduct.product.offerPercentage.getProductPrice(cartProduct.product.price)
-                tvProductPrice.text = "$ ${String.format("%.2f", price)}"
+                tvProductPrice.text = price.formattedPrice()
                 imgProductColor.setImageDrawable(ColorDrawable(cartProduct.selectedColor ?: Color.TRANSPARENT))
-                tvProductPrice.text = cartProduct.selectedSize ?: "".also { imgProductSize.setImageDrawable(ColorDrawable(Color.TRANSPARENT)) }
+                tvProductSize.text = cartProduct.selectedSize ?: "".also { imgProductSize.setImageDrawable(ColorDrawable(Color.TRANSPARENT)) }
             }
         }
 
@@ -56,11 +57,11 @@ class CartProductAdapter : ListAdapter<CartProduct, CartProductAdapter.CartProdu
         }
 
         holder.binding.plusIcon.setOnClickListener {
-            clickPlus?.invoke(cartProduct)
+            onPlusClick?.invoke(cartProduct)
         }
 
         holder.binding.minusIcon.setOnClickListener {
-            clickMinus?.invoke(cartProduct)
+            onMinusClick?.invoke(cartProduct)
         }
     }
 }

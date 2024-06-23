@@ -68,9 +68,7 @@ class FirebaseCommon @Inject constructor(
     }
 
     enum class QuantityChanging {
-
         INCREASE, DECREASE
-
     }
 
 }

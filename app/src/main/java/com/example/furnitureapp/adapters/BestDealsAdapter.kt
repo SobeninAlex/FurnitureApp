@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.furnitureapp.data.Product
 import com.example.furnitureapp.databinding.BestDealsRvItemBinding
+import com.example.furnitureapp.util.formattedPrice
 
 class BestDealsAdapter : RecyclerView.Adapter<BestDealsAdapter.BestDealsViewHolder>() {
 
@@ -22,7 +23,7 @@ class BestDealsAdapter : RecyclerView.Adapter<BestDealsAdapter.BestDealsViewHold
                 product.offerPercentage?.let {
                     val remainingPricePercentage = 1f - it
                     val priceAfterOffer = remainingPricePercentage * product.price
-                    tvNewPrice.text = "$ ${String.format("%.2f", priceAfterOffer)}"
+                    tvNewPrice.text = priceAfterOffer.formattedPrice()
                 }
                 tvOldPrice.text = "$ ${product.price}"
             }
