@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_searchFragment_to_productsDetailFragment"
             app:destination="@id/productsDetailFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_modalBottomSheetFragment"
+            app:destination="@id/modalBottomSheetFragment" />
     </fragment>
 
     <fragment
@@ -49,6 +52,14 @@
         <argument
             android:name="product"
             app:argType="com.example.furnitureapp.data.Product" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/modalBottomSheetFragment"
+        android:name="com.example.furnitureapp.fragments.shopping.ModalBottomSheetFragment"
+        android:label="ModalBottomSheetFragment"
+        tools:layout="@layout/fragment_modal_bottom_sheet">
+
     </fragment>
 
 </navigation>

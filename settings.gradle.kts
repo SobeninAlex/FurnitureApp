@@ -23,3 +23,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "FurnitureApp"
 include(":app")
+include(":upload-attachment")

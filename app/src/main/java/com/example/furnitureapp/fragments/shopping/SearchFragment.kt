@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.furnitureapp.databinding.FragmentSearchBinding
+import com.example.upload_attachment.MainScreen
 
 class SearchFragment : Fragment() {
 
@@ -25,6 +29,10 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.attachFiles.setOnClickListener {
+            val action = SearchFragmentDirections.actionSearchFragmentToModalBottomSheetFragment()
+            findNavController().navigate(action)
+        }
 
     }
 
