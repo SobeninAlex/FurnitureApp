@@ -12,25 +12,15 @@ import com.example.furnitureapp.R
 import com.example.furnitureapp.adapters.BestProductAdapter
 import com.example.furnitureapp.databinding.FragmentBaseCategoryBinding
 import com.example.furnitureapp.fragments.categories.MainCategoryFragment.Companion.PRODUCT_PARCELABLE_KEY
+import com.example.furnitureapp.util.BaseFragment
 import com.example.furnitureapp.util.showBottomNavigation
 
-open class BaseCategoryFragment : Fragment() {
-
-    private var _binding: FragmentBaseCategoryBinding? = null
-    private val binding: FragmentBaseCategoryBinding
-        get() = _binding ?: throw RuntimeException("FragmentBaseCategoryBinding is null")
+open class BaseCategoryFragment : BaseFragment<FragmentBaseCategoryBinding>() {
 
     protected val offerProductAdapter by lazy { BestProductAdapter() }
     protected val bestProductsAdapter by lazy { BestProductAdapter() }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentBaseCategoryBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun getLayoutId() = R.layout.fragment_base_category
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,11 +33,6 @@ open class BaseCategoryFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         showBottomNavigation()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     open fun onOfferProductsPagingRequest() {

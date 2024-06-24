@@ -46,11 +46,9 @@ class ShoppingActivity : AppCompatActivity() {
                         is Resource.Loading -> {}
                         is Resource.Success -> {
                             val count = it.data?.size ?: 0
-                            if (count != 0) {
-                                binding.bottomNavigation.getOrCreateBadge(R.id.cartFragment).apply {
-                                    number = count
-                                    backgroundColor = getColor(R.color.g_blue)
-                                }
+                            binding.bottomNavigation.getOrCreateBadge(R.id.cartFragment).apply {
+                                number = count
+                                backgroundColor = getColor(R.color.g_blue)
                             }
                         }
                     }

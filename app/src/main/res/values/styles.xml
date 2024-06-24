@@ -28,7 +28,7 @@
     </style>
 
     <style name="whiteButtonStyle">
-        <item name="android:background">@drawable/white_background</item>
+        <item name="android:background">@drawable/white_background_border</item>
         <item name="android:fontFamily">@font/poppins_thin</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/h2TextSize</item>

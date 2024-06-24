@@ -22,6 +22,7 @@ import com.example.furnitureapp.adapters.BestDealsAdapter
 import com.example.furnitureapp.adapters.BestProductAdapter
 import com.example.furnitureapp.adapters.SpecialProductsAdapter
 import com.example.furnitureapp.databinding.FragmentMainCategoryBinding
+import com.example.furnitureapp.util.BaseFragment
 import com.example.furnitureapp.util.Resource
 import com.example.furnitureapp.util.showBottomNavigation
 import com.example.furnitureapp.viewmodel.MainCategoryViewModel
@@ -33,11 +34,7 @@ import kotlinx.coroutines.launch
 private const val TAG = "MainCategoryFragment"
 
 @AndroidEntryPoint
-class MainCategoryFragment : Fragment() {
-
-    private var _binding: FragmentMainCategoryBinding? = null
-    private val binding: FragmentMainCategoryBinding
-        get() = _binding ?: throw RuntimeException("FragmentMainCategoryBinding is null")
+class MainCategoryFragment : BaseFragment<FragmentMainCategoryBinding>() {
 
     private val specialProductAdapter by lazy {
         SpecialProductsAdapter()
@@ -53,14 +50,7 @@ class MainCategoryFragment : Fragment() {
 
     private val viewModelMainCategory by viewModels<MainCategoryViewModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentMainCategoryBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun getLayoutId() = R.layout.fragment_main_category
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -75,11 +65,6 @@ class MainCategoryFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         showBottomNavigation()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun scrollChangeListener() {

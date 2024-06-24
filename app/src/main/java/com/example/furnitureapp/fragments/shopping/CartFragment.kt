@@ -12,9 +12,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.example.furnitureapp.R
 import com.example.furnitureapp.adapters.CartProductAdapter
 import com.example.furnitureapp.databinding.FragmentCartBinding
 import com.example.furnitureapp.firebase.FirebaseCommon
+import com.example.furnitureapp.util.BaseFragment
 import com.example.furnitureapp.util.Resource
 import com.example.furnitureapp.util.VerticalItemDecoration
 import com.example.furnitureapp.util.formattedPrice
@@ -38,30 +40,32 @@ import kotlinx.coroutines.launch
  */
 
 @AndroidEntryPoint
-class CartFragment : Fragment() {
-
-    private var _binding: FragmentCartBinding? = null
-    private val binding: FragmentCartBinding
-        get() = _binding ?: throw RuntimeException("FragmentCartBinding is null")
+class CartFragment : BaseFragment<FragmentCartBinding>() {
 
     private val cartAdapter by lazy { CartProductAdapter() }
 
     private val viewModelCart by activityViewModels<CartViewModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentCartBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun getLayoutId() = R.layout.fragment_cart
+
+    var totalPrice = 0f
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupCartRecyclerView()
         viewModelObservers()
+        clickListeners()
+    }
+
+    private fun clickListeners() {
+        binding.buttonCheckout.setOnClickListener {
+            val action = CartFragmentDirections.actionCartFragmentToBillingFragment(
+                totalPrice = totalPrice,
+                products = cartAdapter.currentList.toTypedArray()
+            )
+            findNavController().navigate(action)
+        }
     }
 
     private fun viewModelObservers() {
@@ -104,6 +108,7 @@ class CartFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModelCart.productsPrice.collectLatest { price ->
                     price?.let {
+                        totalPrice = it
                         binding.tvTotalPrice.text = it.formattedPrice()
                     }
                 }
@@ -173,11 +178,6 @@ class CartFragment : Fragment() {
         cartAdapter.onMinusClick = {
             viewModelCart.changeQuantity(it, FirebaseCommon.QuantityChanging.DECREASE)
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }

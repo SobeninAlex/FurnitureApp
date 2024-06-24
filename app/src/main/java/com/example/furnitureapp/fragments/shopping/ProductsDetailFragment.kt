@@ -20,6 +20,7 @@ import com.example.furnitureapp.adapters.SizesAdapter
 import com.example.furnitureapp.data.CartProduct
 import com.example.furnitureapp.data.Product
 import com.example.furnitureapp.databinding.FragmentProductDetailsBinding
+import com.example.furnitureapp.util.BaseFragment
 import com.example.furnitureapp.util.Resource
 import com.example.furnitureapp.util.hideBottomNavigation
 import com.example.furnitureapp.viewmodel.DetailsViewModel
@@ -30,15 +31,11 @@ import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class ProductsDetailFragment : Fragment() {
+class ProductsDetailFragment : BaseFragment<FragmentProductDetailsBinding>() {
 
     private val args by navArgs<ProductsDetailFragmentArgs>()
 
     private val viewModelDetails by viewModels<DetailsViewModel>()
-
-    private var _binding: FragmentProductDetailsBinding? = null
-    private val binding: FragmentProductDetailsBinding
-        get() = _binding ?: throw RuntimeException("FragmentProductDetailsBinding is null")
 
     private val viewpagerImages by lazy { ImagesViewpager() }
     private val colorsAdapter by lazy { ColorsAdapter() }
@@ -47,15 +44,7 @@ class ProductsDetailFragment : Fragment() {
     private var selectedColor: Int? = null
     private var selectedSize: String? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        hideBottomNavigation()
-        _binding = FragmentProductDetailsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun getLayoutId() = R.layout.fragment_product_details
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,11 +60,6 @@ class ProductsDetailFragment : Fragment() {
         clickListeners(product)
 
         viewModelObserver()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun initViews(product: Product) {

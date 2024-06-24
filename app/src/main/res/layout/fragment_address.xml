@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/left_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/right_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.96" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/right_line"
+            app:layout_constraintStart_toStartOf="@id/left_line"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/image_address_close"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_close"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:id="@+id/tv_payment_methods"
+                    style="@style/h2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="Addresses"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/image_address_close"
+                    app:layout_constraintStart_toEndOf="@id/image_address_close"
+                    app:layout_constraintTop_toTopOf="@id/image_address_close" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <View
+            android:id="@+id/top_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/white_background"
+            android:backgroundTint="@color/g_blue_gray200"
+            app:layout_constraintEnd_toEndOf="@id/right_line"
+            app:layout_constraintStart_toStartOf="@id/left_line"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_address" />
+
+        <EditText
+            android:id="@+id/ed_address_title"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/white_background"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="start|center_vertical"
+            android:hint="Address location Ex: Home"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:singleLine="true"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/right_line"
+            app:layout_constraintStart_toStartOf="@id/left_line"
+            app:layout_constraintTop_toBottomOf="@id/top_line" />
+
+        <EditText
+            android:id="@+id/ed_full_name"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/white_background"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="start|center_vertical"
+            android:hint="Full Name"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:singleLine="true"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/right_line"
+            app:layout_constraintStart_toStartOf="@id/left_line"
+            app:layout_constraintTop_toBottomOf="@id/ed_address_title" />
+
+        <EditText
+            android:id="@+id/ed_street"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/white_background"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="start|center_vertical"
+            android:hint="Street"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:singleLine="true"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/right_line"
+            app:layout_constraintStart_toStartOf="@id/left_line"
+            app:layout_constraintTop_toBottomOf="@id/ed_full_name" />
+
+        <EditText
+            android:id="@+id/ed_phone"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/white_background"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="start|center_vertical"
+            android:hint="Phone"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:phoneNumber="true"
+            android:singleLine="true"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/right_line"
+            app:layout_constraintStart_toStartOf="@id/left_line"
+            app:layout_constraintTop_toBottomOf="@id/ed_street" />
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@id/right_line"
+            app:layout_constraintStart_toStartOf="@id/left_line"
+            app:layout_constraintTop_toBottomOf="@id/ed_phone">
+
+            <EditText
+                android:id="@+id/ed_city"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/white_background"
+                android:fontFamily="@font/poppins_light"
+                android:gravity="start|center_vertical"
+                android:hint="City"
+                android:lines="1"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/ed_state"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/white_background"
+                android:fontFamily="@font/poppins_light"
+                android:gravity="start|center_vertical"
+                android:hint="State"
+                android:lines="1"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@id/right_line"
+            app:layout_constraintStart_toStartOf="@id/left_line"
+            app:layout_constraintTop_toBottomOf="@id/linear">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_delete"
+                style="@style/whiteButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_thin"
+                android:text="Delete"
+                android:textAllCaps="false"
+                android:textColor="@color/g_gray700"
+                android:textSize="12sp"
+                android:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_save"
+                style="@style/blueButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_thin"
+                android:text="Save"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_bar_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="45dp"
+            android:indeterminateTint="@color/g_gray700"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

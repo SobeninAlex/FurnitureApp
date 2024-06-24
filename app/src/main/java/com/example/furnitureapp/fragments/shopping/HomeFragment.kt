@@ -14,32 +14,17 @@ import com.example.furnitureapp.fragments.categories.CupboardFragment
 import com.example.furnitureapp.fragments.categories.FurnitureFragment
 import com.example.furnitureapp.fragments.categories.MainCategoryFragment
 import com.example.furnitureapp.fragments.categories.TableFragment
+import com.example.furnitureapp.util.BaseFragment
 import com.google.android.material.tabs.TabLayoutMediator
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
-    private var _binding: FragmentHomeBinding? = null
-    private val binding: FragmentHomeBinding
-        get() = _binding ?: throw RuntimeException("FragmentHomeBinding is null")
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun getLayoutId() = R.layout.fragment_home
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initViewPager()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun initViewPager() {
