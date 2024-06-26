@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseFragment<VB: ViewDataBinding> : Fragment() {
 
@@ -27,6 +28,14 @@ abstract class BaseFragment<VB: ViewDataBinding> : Fragment() {
     fun showToast(message: String) {
         try {
             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        } catch (ex: IllegalStateException) {
+            ex.printStackTrace()
+        }
+    }
+
+    fun showSnackbar(message: String) {
+        try {
+            Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
         } catch (ex: IllegalStateException) {
             ex.printStackTrace()
         }

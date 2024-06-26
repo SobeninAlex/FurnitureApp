@@ -3,6 +3,7 @@ package com.example.furnitureapp.util
 object Constants {
 
     const val USER_COLLECTION = "user"
+    const val ORDERS_COLLECTION = "orders"
     const val ADDRESS_COLLECTION = "address"
     const val CART_COLLECTION = "cart"
     const val PRODUCT_FIELD = "product"

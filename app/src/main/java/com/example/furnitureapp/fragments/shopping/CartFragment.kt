@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.furnitureapp.R
 import com.example.furnitureapp.adapters.CartProductAdapter
 import com.example.furnitureapp.databinding.FragmentCartBinding
+import com.example.furnitureapp.dialog.setupAlertDialog
 import com.example.furnitureapp.firebase.FirebaseCommon
 import com.example.furnitureapp.util.BaseFragment
 import com.example.furnitureapp.util.Resource
@@ -118,19 +119,15 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModelCart.deleteDialog.collectLatest {
-                    val alertDialog = AlertDialog.Builder(requireContext()).apply {
-                        setTitle("Delete item from cart")
-                        setMessage("Do you want to delete this item from your cart?")
-                        setNegativeButton("Cancel") { dialog, _ ->
-                            dialog.dismiss()
-                        }
-                        setPositiveButton("Delete") { dialog, _ ->
+                    setupAlertDialog(
+                        title = "Delete item from cart",
+                        message = "Do you want to delete this item from your cart?",
+                        titlePositiveButton = "Delete",
+                        titleNegativeButton = "Cancel",
+                        clickPositiveButton = {
                             viewModelCart.deleteCartProduct(it)
-                            dialog.dismiss()
                         }
-                    }
-                    alertDialog.create()
-                    alertDialog.show()
+                    )
                 }
             }
         }
