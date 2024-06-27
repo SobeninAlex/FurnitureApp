@@ -1,8 +1,12 @@
 package com.example.furnitureapp.data.order
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 sealed class OrderStatus(
     val status: String
-) {
+) : Parcelable {
     data object Ordered: OrderStatus("Ordered")
     data object Canceled: OrderStatus("Canceled")
     data object Confirmed: OrderStatus("Confirmed")

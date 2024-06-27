@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.example.furnitureapp.R
 import com.example.furnitureapp.adapters.AllOrdersAdapter
 import com.example.furnitureapp.data.order.Order
@@ -29,7 +30,8 @@ class AllOrdersFragment : BaseFragment<FragmentOrdersBinding>() {
     private val allOrdersAdapter by lazy {
         AllOrdersAdapter(object : AllOrdersAdapter.OrdersAdapterListener {
             override fun onOrderClick(order: Order) {
-
+                val action = AllOrdersFragmentDirections.actionOrdersFragmentToOrderDetailFragment(order)
+                findNavController().navigate(action)
             }
         })
     }
