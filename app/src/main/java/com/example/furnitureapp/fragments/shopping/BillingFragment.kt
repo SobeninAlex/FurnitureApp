@@ -23,6 +23,7 @@ import com.example.furnitureapp.util.HorizontalItemDecoration
 import com.example.furnitureapp.util.Resource
 import com.example.furnitureapp.util.formattedPrice
 import com.example.furnitureapp.util.setGone
+import com.example.furnitureapp.util.setInvisible
 import com.example.furnitureapp.util.setVisible
 import com.example.furnitureapp.viewmodel.BillingViewModel
 import com.example.furnitureapp.viewmodel.OrderViewModel
@@ -33,6 +34,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class BillingFragment : BaseFragment<FragmentBillingBinding>() {
 
+    private val args by navArgs<BillingFragmentArgs>()
+
     override fun getLayoutId() = R.layout.fragment_billing
 
     private var selectedAddress: Address? = null
@@ -42,6 +45,10 @@ class BillingFragment : BaseFragment<FragmentBillingBinding>() {
         AddressAdapter(object : AddressAdapter.AddressAdapterListener {
             override fun onAddressClick(address: Address) {
                 selectedAddress = address
+                if (!args.payment) {
+                    val action = BillingFragmentDirections.actionBillingFragmentToAddressFragment(address)
+                    findNavController().navigate(action)
+                }
             }
         })
     }
@@ -51,8 +58,6 @@ class BillingFragment : BaseFragment<FragmentBillingBinding>() {
     }
 
     private val viewModelBilling by viewModels<BillingViewModel>()
-
-    private val args by navArgs<BillingFragmentArgs>()
 
     private var products = emptyList<CartProduct>()
     private var totalPrice = 0f
@@ -81,6 +86,13 @@ class BillingFragment : BaseFragment<FragmentBillingBinding>() {
 
     private fun bind() = with(binding) {
         tvTotalPrice.text = totalPrice.formattedPrice()
+
+        if (!args.payment) {
+            buttonPlaceOrder.setInvisible()
+            totalBoxContainer.setInvisible()
+            middleLine.setInvisible()
+            bottomLine.setInvisible()
+        }
     }
 
     private fun clickListeners() {
@@ -101,7 +113,7 @@ class BillingFragment : BaseFragment<FragmentBillingBinding>() {
     private fun showOrderConfirmationDialog() {
         selectedAddress?.let { address ->
             val order = Order(
-                orderStatus = OrderStatus.Ordered,
+                orderStatus = OrderStatus.Ordered.status,
                 totalPrice = totalPrice,
                 products = products,
                 address = address

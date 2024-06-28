@@ -11,7 +11,7 @@ import kotlin.random.Random
 
 @Parcelize
 data class Order(
-    val orderStatus: OrderStatus = OrderStatus.Ordered,
+    val orderStatus: String = "",
     val totalPrice: Float = 0f,
     val products: List<CartProduct> = emptyList(),
     val address: Address = Address(),

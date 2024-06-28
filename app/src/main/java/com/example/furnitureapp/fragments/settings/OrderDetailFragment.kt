@@ -7,6 +7,7 @@ import com.example.furnitureapp.R
 import com.example.furnitureapp.adapters.BillingProductAdapter
 import com.example.furnitureapp.data.order.Order
 import com.example.furnitureapp.data.order.OrderStatus
+import com.example.furnitureapp.data.order.getOrderStatus
 import com.example.furnitureapp.databinding.FragmentOrderDetailBinding
 import com.example.furnitureapp.util.BaseFragment
 import com.example.furnitureapp.util.VerticalItemDecoration
@@ -46,7 +47,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
                 OrderStatus.Delivered.status
             )
         )
-        val currentOrderStatus = when(order.orderStatus) {
+        val currentOrderStatus = when(getOrderStatus(order.orderStatus)) {
             OrderStatus.Ordered -> 0
             OrderStatus.Confirmed -> 1
             OrderStatus.Shipped -> 2

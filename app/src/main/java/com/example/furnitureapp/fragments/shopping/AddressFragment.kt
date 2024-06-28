@@ -8,6 +8,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.furnitureapp.R
 import com.example.furnitureapp.data.Address
 import com.example.furnitureapp.databinding.FragmentAddressBinding
@@ -26,10 +27,27 @@ class AddressFragment : BaseFragment<FragmentAddressBinding>() {
 
     private val viewModelAddress by viewModels<AddressViewModel>()
 
+    private val args by navArgs<AddressFragmentArgs>()
+
     override fun getLayoutId() = R.layout.fragment_address
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val address = args.address
+
+        if (address == null) {
+            binding.btnDelete.setGone()
+        } else {
+            with(binding) {
+                edAddressTitle.setText(address.addressTitle)
+                edFullName.setText(address.fullName)
+                edState.setText(address.state)
+                edPhone.setText(address.phone)
+                edCity.setText(address.city)
+                edStreet.setText(address.street)
+            }
+        }
 
         clickListeners()
         viewModelObserver()

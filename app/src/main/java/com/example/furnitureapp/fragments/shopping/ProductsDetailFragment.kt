@@ -1,11 +1,8 @@
 package com.example.furnitureapp.fragments.shopping
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -13,7 +10,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.furnitureapp.R
-import com.example.furnitureapp.activities.ShoppingActivity
 import com.example.furnitureapp.adapters.ColorsAdapter
 import com.example.furnitureapp.adapters.ImagesViewpager
 import com.example.furnitureapp.adapters.SizesAdapter
@@ -22,9 +18,7 @@ import com.example.furnitureapp.data.Product
 import com.example.furnitureapp.databinding.FragmentProductDetailsBinding
 import com.example.furnitureapp.util.BaseFragment
 import com.example.furnitureapp.util.Resource
-import com.example.furnitureapp.util.hideBottomNavigation
 import com.example.furnitureapp.viewmodel.DetailsViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

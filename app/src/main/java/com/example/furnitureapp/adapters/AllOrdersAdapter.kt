@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.furnitureapp.R
 import com.example.furnitureapp.data.order.Order
 import com.example.furnitureapp.data.order.OrderStatus
+import com.example.furnitureapp.data.order.getOrderStatus
 import com.example.furnitureapp.databinding.OrderItemBinding
 
 class AllOrdersAdapter(
@@ -25,23 +26,23 @@ class AllOrdersAdapter(
             tvOrderDate.text = order.date
 
             with(itemView.context) {
-                val colorDrawable = when (order.orderStatus) {
-                    OrderStatus.Canceled -> {
+                val colorDrawable = when (getOrderStatus(order.orderStatus)) {
+                    is OrderStatus.Canceled -> {
                         ColorDrawable(getColor(R.color.g_red))
                     }
-                    OrderStatus.Confirmed -> {
+                    is OrderStatus.Confirmed -> {
                         ColorDrawable(getColor(R.color.g_green))
                     }
-                    OrderStatus.Delivered -> {
+                    is OrderStatus.Delivered -> {
                         ColorDrawable(getColor(R.color.g_green))
                     }
-                    OrderStatus.Ordered -> {
+                    is OrderStatus.Ordered -> {
                         ColorDrawable(getColor(R.color.g_orange_yellow))
                     }
-                    OrderStatus.Returned -> {
+                    is OrderStatus.Returned -> {
                         ColorDrawable(getColor(R.color.g_red))
                     }
-                    OrderStatus.Shipped -> {
+                    is OrderStatus.Shipped -> {
                         ColorDrawable(getColor(R.color.g_green))
                     }
                 }
